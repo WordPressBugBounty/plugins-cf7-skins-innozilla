@@ -36,7 +36,7 @@ Contact Form 7 Skins/Style - Makes creating Contact form 7 form styles easy - ev
 * Minimal Design
 * Auto style upon installation
 * 100% CF7 compatible
-* Responsive Support.
+* Responsive Support
 
 **PREMIUM FEATURES**
 

@@ -12,6 +12,9 @@
 function icf7s_sript_enqueue() {  
 
     $icf7s_option = get_option( 'icf7s_options' );
+    if ( ! is_array( $icf7s_option ) ) {
+        $icf7s_option = array();
+    }
     wp_enqueue_script( 'filter_js_icf7s', ICF7S_PLUGIN_URL . '/js/icf7s_configure.js', array('jquery') );
     wp_enqueue_style( 'font_style_js_icf7s', ICF7S_PLUGIN_URL . '/css/front_style.css' );
     wp_localize_script('filter_js_icf7s', 'icf7s_option', $icf7s_option );
@@ -180,6 +183,10 @@ function custom_skin_query_icf7s() {
         font-family: sans-serif;
         cursor: inherit;
         margin-bottom: 15px;
+    }
+    .wpcf7<?php echo $pc; ?> label .wpcf7-form-control-wrap {
+        position: relative;
+        display: flex;
     }
     .wpcf7<?php echo $pc; ?> br {
         display: none;

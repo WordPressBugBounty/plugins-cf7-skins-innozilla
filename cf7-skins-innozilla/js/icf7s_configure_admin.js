@@ -34,13 +34,8 @@ jQuery(document).ready(function($) {
 			//
 			$(window).on('load', function() {
 				var isChecked = checkBox.hasClass('checked');
-				originalCheckBox.attr('checked',isChecked);
-
-				if (originalCheckBox.attr('checked')) {
-					$(originalCheckBox).val('1');
-				} else {
-					$(originalCheckBox).val('0');
-				}
+				originalCheckBox.prop('checked', isChecked);
+				originalCheckBox.val(isChecked ? '1' : '0');
 			})
 
 			checkBox.click(function(){
@@ -49,23 +44,11 @@ jQuery(document).ready(function($) {
 				var isChecked = checkBox.hasClass('checked');
 				
 				// Synchronizing the original checkbox:
-				originalCheckBox.attr('checked',isChecked);
-				if (originalCheckBox.attr('checked')) {
-					$(originalCheckBox).val('1');
-				} else {
-					$(originalCheckBox).val('0');
-				}
+				originalCheckBox.prop('checked', isChecked);
+				originalCheckBox.val(isChecked ? '1' : '0');
+				originalCheckBox.trigger('change');
 				checkBox.find('.tzCBContent').html(labels[isChecked?0:1]);
-				// 1.1.4 Update
-				TrigggerIT(originalCheckBox);
-				// end of 1.1.4
 			});
-			
-			// 1.1.5 Update
-			function TrigggerIT(x) {
-				x.prop( "checked", true );
-			}
-			// end of1.1.5
 		});
 	};
 
@@ -115,6 +98,25 @@ jQuery(document).ready(function($) {
 
 	rangeSlider();
 	rangeSlider2();
+
+	// reset style panel values
+	$(document).on('click', '.icf7s-reset-style', function(e) {
+		if (!confirm('Are you sure you want to reset the style?')) {
+			e.preventDefault();
+			return false;
+		}
+
+		$('.second-coll input').each(function() {
+			$(this).removeAttr('value');
+		});
+		$('.rsr1').attr('value', '100');
+		$('.rsv1').html('100%');
+		$('.rsr2').attr('value', '15');
+		$('.rsv2').html('15%');
+		$('.reset-inst').slideDown('slow', function() {
+			$(this).css('display', 'inline-block');
+		});
+	});
 
 	// hex color pallete
 

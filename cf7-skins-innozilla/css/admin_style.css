@@ -2,7 +2,10 @@
 
 .icf7-admin-wrap {
     width: 100%;
-    display: inline-block;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .icf7-admin-wrap .inner-coll {
@@ -13,11 +16,12 @@
 
 .icf7-admin-wrap .inner-coll:first-child {
   width: 49%;
-    margin-right: 1%;
 }
 
 .icf7-admin-wrap .inner-coll:last-child {
   background-color: #fff;
+  position: sticky;
+  top: 50px;
 }
 
 
@@ -125,6 +129,7 @@
   position:relative;
   cursor:pointer;
   margin-left:14px;
+  background:url('../images/background.png') no-repeat right bottom;
 }
 
 .tzCheckBox.checked{
@@ -151,6 +156,7 @@
   left:-14px;
   height:33px;
   overflow: hidden;
+  background:url('../images/background.png') no-repeat left bottom;
 }
 
 .tzCheckBox.checked .tzCBPart{
@@ -166,6 +172,10 @@
   padding: 15px 25px;
   border-bottom: 1px solid #fff;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 .style-activation-wrap .inner-wrap h5 {
    font-size: 18px;
@@ -199,16 +209,14 @@
 }
 .style-activation-wrap .inner-wrap small {
   width: 100%;
-  background: #cb0c53;
+  background: #cb0c11;
   color: #fff;
-  padding: 7px 0px 7px 10px;
-  font-size: 14px;
-  margin-top: 14px;
-  line-height: 25px;
-  border-radius: 0;
   display: block;
-  max-width: 900px;
-  z-index: 2;
+  padding: 10px 20px;
+  font-size: 15px;
+  line-height: 27px;
+  width: auto;
+  margin-top: 20px;
 }
 .style-activation-wrap .inner-wrap small a {
   color: #fff;

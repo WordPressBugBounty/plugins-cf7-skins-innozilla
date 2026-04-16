@@ -14,6 +14,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 class ICF7S_Skin {
+	/**
+	 * Plugin URL path.
+	 *
+	 * @var string
+	 */
+	private $plugin_url = '';
+
+	/**
+	 * Plugin filesystem path.
+	 *
+	 * @var string
+	 */
+	private $plugin_path = '';
+
+	/**
+	 * Internal class version.
+	 *
+	 * @var string
+	 */
+	private $version = '';
 
 	/**
 	 * Construct class
@@ -224,13 +244,16 @@ class ICF7S_Skin {
 		if ( ! isset( $_POST ) || empty( $_POST ) ) {
 			return;
 		} else {
-			if ( ! wp_verify_nonce( $_POST['icf7s_skin_page_metaboxes_nonce'], 'icf7s_skin_page_metaboxes' ) ) {
+			if ( ! isset( $_POST['icf7s_skin_page_metaboxes_nonce'] ) ) {
+				return;
+			}
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['icf7s_skin_page_metaboxes_nonce'] ) ), 'icf7s_skin_page_metaboxes' ) ) {
 				return;
 			}
 
 			$form_id = $contact_form->id();
 			$fields = $this->get_plugin_fields( $form_id );
-			$data = $_POST['icf7s-skin'];
+			$data = isset( $_POST['icf7s-skin'] ) && is_array( $_POST['icf7s-skin'] ) ? wp_unslash( $_POST['icf7s-skin'] ) : array();
 
 			foreach ( $fields as $field ) {
 				$value = isset( $data[ $field['name'] ] ) ? $data[ $field['name'] ] : '';
@@ -276,7 +299,7 @@ class ICF7S_Skin {
 		wp_nonce_field( 'icf7s_skin_page_metaboxes', 'icf7s_skin_page_metaboxes_nonce' );
 		$fields = $this->get_fields_values( $post->id() );
 		
-		$post_id = sanitize_text_field($_GET['post']);
+		$post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : 0;
 		
 		?>
 		<div class="style-activation-wrap">
@@ -298,6 +321,7 @@ class ICF7S_Skin {
 				</h5>
 			
 			
+		</div>
 		</div>
 		<div class="icf7-admin-wrap">
 			<div class="inner-coll">
@@ -639,29 +663,10 @@ class ICF7S_Skin {
 								</table>
 								<hr>
 								<div style="margin-top: 20px;">
-									<button type="reset" onclick="resetSkins()" class="button-secondary">Reset Style</button>
+									<button type="reset" class="button-secondary icf7s-reset-style">Reset Style</button>
 									<button type="submit" value="Save" class="button-primary" style="margin-left:5px; float: right;">Save</button>
 									<small class="reset-inst">Please click <b>"Save"</b> to reset the style. </small>
 								</div>
-								<script type="text/javascript">
-									function resetSkins() {
-										jQuery(document).ready(function($) {
-											
-											if (confirm('Are you sure you want to reset the style?')) {
-												$(".second-coll input").each(function() {
-											        $(this).removeAttr('value');
-											        $('.rsr1').attr('value','100');
-											        $('.rsv1').html('100%');
-											        $('.rsr2').attr('value','15');
-											        $('.rsv2').html('15%');
-											    });
-											    $(".reset-inst").slideDown("slow");
-											} else {
-												
-											}
-										});
-									}
-								</script>	
 							
 						</div>
 					</fieldset>
@@ -674,16 +679,6 @@ class ICF7S_Skin {
 				</div>
 			</div>
 		</div>
-	<?php $path = untrailingslashit( plugins_url( '', ICF7S_PLUGIN ) ); ?>
-	<style type="text/css">	
-		.tzCBPart {
-			background:url('<?php echo $path; ?>/images/background.png; ') no-repeat left bottom;
-		}
-		.tzCheckBox{
-			background:url('<?php echo $path; ?>/images/background.png; ') no-repeat right bottom;
-		}
-	</style>
-		
 	<?php
 
 	}

@@ -4,7 +4,7 @@ Donate link: https://innozilla.com/wordpress-plugins/contact-form-7-skins/#donat
 Tags: contact form 7, contact form 7 style, cf7
 Requires at least: 4.0
 Tested up to: 6.5
-Stable tag: 4.0.6
+Stable tag: 4.0.8
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -29,7 +29,7 @@ Contact Form 7 Skins/Style - Makes creating Contact form 7 form styles easy - ev
 * Easy to use, Install and Style!
 * Layout settings (1-3 columns)
 * Field color, font size, border settings etc.
-* Button Style Settings.
+* Button Style Settings
 * Reset Style Functionality
 * Straight forward Settings
 * Responsive Ready
@@ -95,6 +95,9 @@ Please open a support ticket in the forum. We will get back to you within 24 hou
 7. Default Contact form 7 code format
 
 == Changelog ==
+= 1.1.8 =
+* Major Updates
+
 = 1.1.5 =
 * Small bug fix
 
